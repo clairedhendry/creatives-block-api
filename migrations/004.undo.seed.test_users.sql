@@ -1,0 +1,5 @@
+BEGIN; 
+
+TRUNCATE users;
+
+COMMIT;

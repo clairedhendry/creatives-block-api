@@ -1,5 +1,6 @@
 module.exports = {
     PORT: process.env.PORT || 8000,
     NODE_ENV: process.env.NODE_ENV || 'development',
-    CLIENT_ORIGIN: 'https://creatives-block-client.vercel.app/'
-}
+    DB_URL: process.env.DB_URL,
+    TEST_DB_URL: process.env.TEST_DB_URL || "postgresql://CreativesBlock@localhost/CreativesBlock-test",
+};
