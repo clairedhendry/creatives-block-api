@@ -15,5 +15,27 @@ BlockRouter
     .catch(next)
     })
 
+BlockRouter
+    .route('/blocks/:category/:id')
+    .all((req, res, next) => {
+        BlockRouter.getBlockById(
+            req.app.get('db'),
+            req.params.id)
+    
+    .then(block => {
+        if(!block) {
+            return res.status(404).json({
+                error: {message: `Block doesn't exist`}
+            })
+            
+        }
+        res.block = block
+        next()
+    })
+    .catch(next)
+    })
+    .get((req, res, next) => {
+        res.json(res.block)
+    })
 
 module.exports = BlockRouter
