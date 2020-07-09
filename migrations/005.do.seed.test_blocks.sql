@@ -1,6 +1,6 @@
 BEGIN;
 
-INSERT INTO blocks (user, category_id, block_title, block_file, block_description, optional_details, date_updated)
+INSERT INTO blocks (user_id, category_id, block_title, block_file, block_description, optional_details, date_updated)
 VALUES
 (1, 'art', 'Planet Express Ship Portrait', 'https://images-na.ssl-images-amazon.com/images/I/31Rvw9O8ApL._AC_.jpg', 'this is a portrait of the ship', 'are my colors ok?', '2020-01-12'),
 (1, 'art', 'Travel Comic', 'https://images-na.ssl-images-amazon.com/images/I/31Rvw9O8ApL._AC_.jpg', 'a comic about our deliveries', 'does this flow alirght? how about page two?', '2020-04-12'),
@@ -22,7 +22,7 @@ VALUES
 (1, 'music', 'Holophonor suite 1', 'https://freesound.org/data/previews/177/177843_1506826-lq.mp3', 'holophonor suite 1', 'cant seem to figure out this line', '2020-06-14'),
 (3, 'music', 'Holophonor song 2', 'https://freesound.org/data/previews/177/177843_1506826-lq.mp3', 'holophonor song 2', 'is it moody enough?', '2020-05-24'),
 (2, 'music', 'Holophonor Leela song', 'https://freesound.org/data/previews/514/514847_2454582-lq.mp3', 'holophonor leela song', 'stuck on this part', '2020-04-18'),
-(1, 'music', 'Holophonor suite 1', 'https://freesound.org/data/previews/177/177843_1506826-lq.mp3', 'holophonor suite 1', 'cant seem to figure out this line', '2020-04-17'),
+(1, 'music', 'Holophonor suite 1', 'https://freesound.org/data/previews/177/177843_1506826-lq.mp3', 'holophonor suite 1', 'cant seem to figure out this line', '2020-04-17')
 ;
 
 COMMIT;
