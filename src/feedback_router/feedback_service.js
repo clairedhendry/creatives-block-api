@@ -5,15 +5,14 @@ const FeedbackService = {
         return knex
             .from('block_feedback')
             .select('*')
-            .where('id', block_id)
+            .where('block_id', block_id)
     },
 //protected
     postFeedback(knex, feedback) {
         return knex
             .insert(feedback) 
             .into('block_feedback')
-            .returning('*')
-            .then(rows => {return rows[0]})
+            .returning('*')            .then(rows => {return rows[0]})
     },
 
     updateFeedbackById(knex, feedback_id, newFeedback) {
@@ -25,4 +24,4 @@ const FeedbackService = {
 }
 
 
-module.exports = { FeedbackService }
+module.exports =  FeedbackService 
