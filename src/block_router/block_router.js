@@ -20,7 +20,7 @@ BlockRouter
 
 BlockRouter
     .route('/:category/:id')
-    .all(requireAuth)
+    // .all(requireAuth)
     .all((req, res, next) => {
         BlockService.getBlockById(
             req.app.get('db'),
@@ -43,12 +43,29 @@ BlockRouter
         res.json(res.block)
     })
 
+    .patch(jsonParser, (req, res, next) => {
+        const { id, block_file, block_description, feedback_details, date_updated } = req.body
+        const newBlock = { id, block_file, block_description, feedback_details }
+
+        newBlock.date_updated = new Date();
+
+        BlockService.updateBlock(
+            req.app.get('db'),
+            req.params.id,
+            newBlock
+        )
+        .then(numRowsAffected => {
+            res.status(204).end()
+        })
+        .catch(next)
+    })
+
 BlockRouter
     .route('/:category')
-    .all(requireAuth)
+    // .all(requireAuth)
     .post(jsonParser, (req, res, next) => {
-        const { user_id, user_name, category_id, block_title, block_file, block_description, optional_details, date_updated } = req.body;
-        const newBlock = { user_id, user_name, category_id, block_title,  block_file, block_description, optional_details }
+        const { user_id, user_name, category_id, block_title, block_file, block_description, feedback_details, date_updated } = req.body;
+        const newBlock = { user_id, user_name, category_id, block_title,  block_file, block_description, feedback_details }
 
         for(const [key, value] of Object.entries(newBlock)) {
             if(value ==- null) {
@@ -68,6 +85,19 @@ BlockRouter
             res.status(201)
                 .location(path.posix.join(req.originalUrl, `/${block.category_id}/${block.id}`))
                 .json(block)
+        })
+        .catch(next)
+    })
+
+BlockRouter 
+    .route('/:user_name')
+    .get((req, res, next) => {
+        BlockService.getAllBlocksByUser(
+            req.app.get('db'),
+            req.params.user_name
+        )
+        .then(blocks => {
+            res.json(blocks)
         })
         .catch(next)
     })

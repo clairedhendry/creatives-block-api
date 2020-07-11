@@ -6,6 +6,6 @@ CREATE TABLE blocks (
     block_title TEXT NOT NULL,
     block_file TEXT NOT NULL,
     block_description TEXT NOT NULL,
-    optional_details TEXT,
+    feedback_details TEXT,
     date_updated TIMESTAMPTZ NOT NULL DEFAULT now()
 );

@@ -6,6 +6,7 @@ const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
 const { CLIENT_ORIGIN } = require('./config')
 const BlockRouter = require('../src/block_router/block_router')
+const FeedbackRouter = require('../src/feedback_router/feedback_router')
 
 const app = express()
 
@@ -21,6 +22,7 @@ app.use(helmet())
 app.use(cors())
 
 app.use('/api/blocks/', BlockRouter);
+app.use('/api/feedback/', FeedbackRouter);
 
 app.use(function errorHandler(error, req, res, next) {
      let response

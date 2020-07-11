@@ -1,6 +1,6 @@
 BEGIN;
 
-INSERT INTO blocks (user_id, user_name, category_id, block_title, block_file, block_description, optional_details, date_updated)
+INSERT INTO blocks (user_id, user_name, category_id, block_title, block_file, block_description, feedback_details, date_updated)
 VALUES
 (1, 'Leela', 'art', 'Planet Express Ship Portrait', 'https://images-na.ssl-images-amazon.com/images/I/31Rvw9O8ApL._AC_.jpg', 'this is a portrait of the ship', 'are my colors ok?', '2020-01-12'),
 (1, 'Leela', 'art', 'Travel Comic', 'https://images-na.ssl-images-amazon.com/images/I/31Rvw9O8ApL._AC_.jpg', 'a comic about our deliveries', 'does this flow alirght? how about page two?', '2020-04-12'),

@@ -4,4 +4,5 @@ CREATE TABLE block_feedback (
     feedback TEXT NOT NULL,
     date_provided TIMESTAMP DEFAULT now(),
     userId INTEGER REFERENCES users(id) NOT NULL,
+    flagged BOOLEAN
 );
