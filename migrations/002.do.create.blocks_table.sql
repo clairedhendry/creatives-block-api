@@ -7,5 +7,5 @@ CREATE TABLE blocks (
     block_file TEXT NOT NULL,
     block_description TEXT NOT NULL,
     optional_details TEXT,
-    date_updated TIMESTAMP DEFAULT now()
+    date_updated TIMESTAMPTZ NOT NULL DEFAULT now()
 );

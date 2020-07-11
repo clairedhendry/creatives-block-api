@@ -20,7 +20,7 @@ app.use(helmet())
 // );
 app.use(cors())
 
-app.use('/api/recent-blocks', BlockRouter);
+app.use('/api/blocks/', BlockRouter);
 
 app.use(function errorHandler(error, req, res, next) {
      let response
