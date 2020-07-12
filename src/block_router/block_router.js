@@ -2,12 +2,14 @@ const express = require('express');
 const path = require('path')
 const BlockService = require('./block_service');
 const { requireAuth } = require('../middleware/basic-auth');
+const { requireAPIToken } = require('../middleware/api-auth')
 
 const BlockRouter = express.Router();
 const jsonParser = express.json();
 
 BlockRouter
     .route('/recent-blocks')
+    // .all(requireAPIToken)
     .get((req, res, next) => {
         BlockService.getAllRecentBlocks(
             req.app.get('db')
@@ -20,7 +22,8 @@ BlockRouter
 
 BlockRouter
     .route('/:category/:id')
-    // .all(requireAuth)
+    .all(requireAPIToken)
+    .all(requireAuth)
     .all((req, res, next) => {
         BlockService.getBlockById(
             req.app.get('db'),
@@ -48,6 +51,7 @@ BlockRouter
         const newBlock = { id, block_file, block_description, feedback_details }
 
         newBlock.date_updated = new Date();
+        newBlock.user_id = req.user.id
 
         BlockService.updateBlock(
             req.app.get('db'),
@@ -62,10 +66,11 @@ BlockRouter
 
 BlockRouter
     .route('/:category')
-    // .all(requireAuth)
+    .all(requireAPIToken)
+    .all(requireAuth)
     .post(jsonParser, (req, res, next) => {
-        const { user_id, user_name, category_id, block_title, block_file, block_description, feedback_details, date_updated } = req.body;
-        const newBlock = { user_id, user_name, category_id, block_title,  block_file, block_description, feedback_details }
+        const { user_name, category_id, block_title, block_file, block_description, feedback_details, date_updated } = req.body;
+        const newBlock = { user_name, category_id, block_title,  block_file, block_description, feedback_details }
 
         for(const [key, value] of Object.entries(newBlock)) {
             if(value ==- null) {
@@ -75,7 +80,8 @@ BlockRouter
             }
         }
 
-        newBlock.date_updated = new Date()
+        newBlock.date_updated = new Date();
+        newBlock.user_id = req.user.id
 
         BlockService.postBlock(
             req.app.get('db'),
@@ -91,6 +97,7 @@ BlockRouter
 
 BlockRouter 
     .route('/:user_name')
+    .all(requireAPIToken)
     .get((req, res, next) => {
         BlockService.getAllBlocksByUser(
             req.app.get('db'),

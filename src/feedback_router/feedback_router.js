@@ -2,12 +2,15 @@ const express = require('express');
 const path = require('path')
 const FeedbackService = require('./feedback_service');
 const { requireAuth } = require('../middleware/basic-auth');
+const { requireAPIToken } = require('../middleware/api-auth');
 
 const FeedbackRouter = express.Router();
 const jsonParser = express.json();
 
 FeedbackRouter
     .route('/:block_id')
+    .all(requireAPIToken)
+    .all(requireAuth)
     .all((req, res, next) => {
         FeedbackService.getBlockFeedbackById(
         req.app.get('db'),

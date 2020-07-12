@@ -28,6 +28,9 @@ describe(`Creative's Block endpoints`, () => {
           .expect(200, [])
       })
     })
+
+    //auth
+    
   })
 
 })
