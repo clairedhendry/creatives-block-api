@@ -2,14 +2,15 @@ const express = require('express');
 const path = require('path')
 const BlockService = require('./block_service');
 const { requireAuth } = require('../middleware/basic-auth');
-const { requireAPIToken } = require('../middleware/api-auth')
+const { requireAPIToken } = require('../middleware/api-auth');
+
 
 const BlockRouter = express.Router();
 const jsonParser = express.json();
 
 BlockRouter
     .route('/recent-blocks')
-    // .all(requireAPIToken)
+    .all(requireAPIToken)
     .get((req, res, next) => {
         BlockService.getAllRecentBlocks(
             req.app.get('db')
@@ -22,8 +23,8 @@ BlockRouter
 
 BlockRouter
     .route('/:category/:id')
-    .all(requireAPIToken)
-    .all(requireAuth)
+    // .all(requireAPIToken)
+    // .all(requireAuth)
     .all((req, res, next) => {
         BlockService.getBlockById(
             req.app.get('db'),
@@ -66,8 +67,8 @@ BlockRouter
 
 BlockRouter
     .route('/:category')
-    .all(requireAPIToken)
-    .all(requireAuth)
+    // .all(requireAPIToken)
+    // .all(requireAuth)
     .post(jsonParser, (req, res, next) => {
         const { user_name, category_id, block_title, block_file, block_description, feedback_details, date_updated } = req.body;
         const newBlock = { user_name, category_id, block_title,  block_file, block_description, feedback_details }
@@ -97,7 +98,7 @@ BlockRouter
 
 BlockRouter 
     .route('/:user_name')
-    .all(requireAPIToken)
+    // .all(requireAPIToken)
     .get((req, res, next) => {
         BlockService.getAllBlocksByUser(
             req.app.get('db'),

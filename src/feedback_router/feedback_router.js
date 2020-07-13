@@ -9,8 +9,8 @@ const jsonParser = express.json();
 
 FeedbackRouter
     .route('/:block_id')
-    .all(requireAPIToken)
-    .all(requireAuth)
+    // .all(requireAPIToken)
+    // .all(requireAuth)
     .all((req, res, next) => {
         FeedbackService.getBlockFeedbackById(
         req.app.get('db'),
