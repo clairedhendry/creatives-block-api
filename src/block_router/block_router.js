@@ -10,7 +10,7 @@ const jsonParser = express.json();
 
 BlockRouter
     .route('/recent-blocks')
-    .all(requireAPIToken)
+    // .all(requireAPIToken)
     .get((req, res, next) => {
         BlockService.getAllRecentBlocks(
             req.app.get('db')
@@ -66,12 +66,19 @@ BlockRouter
     })
 
 BlockRouter
-    .route('/:category')
+    .route('/:user_name')
     // .all(requireAPIToken)
     // .all(requireAuth)
     .post(jsonParser, (req, res, next) => {
+        //need to fix so that user_id is not coming through client, but verified by server
         const { user_name, category_id, block_title, block_file, block_description, feedback_details, date_updated } = req.body;
-        const newBlock = { user_name, category_id, block_title,  block_file, block_description, feedback_details }
+
+        const user_id = BlockService.getUserId(
+            req.app.get('db'),
+            user_name
+        )
+       
+        const newBlock = { user_name, category_id, block_title, block_file, block_description, feedback_details }
 
         for(const [key, value] of Object.entries(newBlock)) {
             if(value ==- null) {
@@ -82,7 +89,7 @@ BlockRouter
         }
 
         newBlock.date_updated = new Date();
-        newBlock.user_id = req.user.id
+        newBlock.user_id = user_id
 
         BlockService.postBlock(
             req.app.get('db'),
@@ -90,7 +97,7 @@ BlockRouter
         )
         .then(block => {
             res.status(201)
-                .location(path.posix.join(req.originalUrl, `/${block.category_id}/${block.id}`))
+                .location(path.posix.join(req.originalUrl, `/${block.user_name}/${block.category_id}/${block.id}`))
                 .json(block)
         })
         .catch(next)

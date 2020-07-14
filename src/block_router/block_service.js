@@ -40,6 +40,15 @@ const BlockService = {
     updateUserCredits(knex, user_id, newCreditCount) {
 
     },
+
+    //temp, use authtoken for real thing
+    getUserId(knex, username) {
+        return knex
+            .select('id')
+            .from('users')
+            .where('username', username)
+            .first()
+    }
 }
 
 module.exports = BlockService

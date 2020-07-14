@@ -1,5 +1,0 @@
-BEGIN; 
-
-TRUNCATE users;
-
-COMMIT;
