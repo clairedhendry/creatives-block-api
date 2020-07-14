@@ -12,7 +12,8 @@ const FeedbackService = {
         return knex
             .insert(feedback) 
             .into('block_feedback')
-            .returning('*')            .then(rows => {return rows[0]})
+            .returning('*')           
+             .then(rows => {return rows[0]})
     },
 
     updateFeedbackById(knex, feedback_id, newFeedback) {
