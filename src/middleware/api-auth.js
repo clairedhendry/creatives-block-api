@@ -1,4 +1,4 @@
-const { API_TOKEN } = require('../config')
+const { API_TOKEN } = require('../../config')
 
 function requireAPIToken(req, res, next) {
     const APItoken = req.get('API_TOKEN') || ''

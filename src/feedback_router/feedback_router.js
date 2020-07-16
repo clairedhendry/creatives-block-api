@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path')
 const FeedbackService = require('./feedback_service');
-const { requireAuth } = require('../middleware/basic-auth');
+const { requireAuth } = require('../middleware/jwt-auth');
 const { requireAPIToken } = require('../middleware/api-auth');
 
 const FeedbackRouter = express.Router();
@@ -10,7 +10,7 @@ const jsonParser = express.json();
 FeedbackRouter
     .route('/:block_id')
     // .all(requireAPIToken)
-    // .all(requireAuth)
+    .all(requireAuth)
     .all((req, res, next) => {
         FeedbackService.getBlockFeedbackById(
         req.app.get('db'),
@@ -38,8 +38,13 @@ FeedbackRouter
     })
 
     .post(jsonParser, (req, res, next) => {
-        const { block_id, feedback, date_provided, userid, flagged } = req.body
-        const newFeedback = { block_id, feedback, userid, flagged } 
+        const { block_id, feedback, date_provided, user_name, flagged } = req.body
+        const newFeedback = { block_id, feedback, user_name, flagged } 
+
+        const user_id = BlockService.getUserId(
+            req.app.get('db'),
+            user_name
+        )
 
         for(const [key, value] of Object.entries(newFeedback)) {
             if (value === null) {
@@ -50,6 +55,7 @@ FeedbackRouter
         }
 
         newFeedback.date_provided = new Date()
+        newFeedback.user_id = user_id
 
         FeedbackService.postFeedback(
             req.app.get('db'),
