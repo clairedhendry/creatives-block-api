@@ -4,13 +4,14 @@ const BlockService = {
         return knex
             .from('blocks')
             .select('*')
+            .limit(60)
     },
 
     getAllBlocksByUser(knex, user_name) {
         return knex 
             .from('blocks')
             .select('*')
-            .where({user_name})
+            .where('user_name', user_name)
     },
     //protected
     getBlockById(knex, category, block_id) {
@@ -41,7 +42,7 @@ const BlockService = {
 
     },
 
-    //temp, use authtoken for real thing
+    
     getUserId(knex, username) {
         return knex
             .select('id')

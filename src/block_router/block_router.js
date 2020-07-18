@@ -66,16 +66,16 @@ BlockRouter
     })
 
 BlockRouter
-    .route('/:user_name/newblock')
+    .route('/:user_name')
     // .all(requireAPIToken)
     .all(requireAuth)
     .post(jsonParser, (req, res, next) => {
         //need to fix so that user_id is not coming through client, but verified by server
-        const { username, category_id, block_title, block_file, block_description, feedback_details, date_updated } = req.body;
+        const { user_name, category_id, block_title, block_file, block_description, feedback_details, date_updated } = req.body;
 
         const user_id = BlockService.getUserId(
             req.app.get('db'),
-            username
+            req.params.user_name
         )
        
         const newBlock = { user_name, category_id, block_title, block_file, block_description, feedback_details }
@@ -103,18 +103,18 @@ BlockRouter
         .catch(next)
     })
 
-BlockRouter 
-    .route('/:user_name')
-    // .all(requireAPIToken)
-    .get((req, res, next) => {
-        BlockService.getAllBlocksByUser(
-            req.app.get('db'),
-            req.params.user_name
-        )
-        .then(blocks => {
-            res.json(blocks)
-        })
-        .catch(next)
-    })
+// BlockRouter 
+//     .route('/:user_name')
+//     // .all(requireAPIToken)
+//     .get((req, res, next) => {
+//         BlockService.getAllBlocksByUser(
+//             req.app.get('db'),
+//             req.params.user_name,
+//         )
+//         .then(blocks => {
+//             res.json(blocks)
+//         })
+//         .catch(next)
+//     })
 
 module.exports = BlockRouter
