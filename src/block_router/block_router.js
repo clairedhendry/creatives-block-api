@@ -14,6 +14,7 @@ BlockRouter
     .get((req, res, next) => {
         BlockService.getAllRecentBlocks(
             req.app.get('db')
+    
         )
     .then(blocks => {
         res.json(blocks)

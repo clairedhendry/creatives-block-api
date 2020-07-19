@@ -15,36 +15,36 @@ function makeUsersArray() {
     return [
       {
         id: 1,
-        user_name: 'Leela',
-        password: 'leelaspassword',
+        username: 'Leela',
+        user_password: 'leelaspassword',
         user_email: 'test-user-1-email',
         credits: 10
       },
       {
         id: 2,
-        user_name: 'Bender',
-        password: 'benderspassword',
+        username: 'Bender',
+        user_password: 'benderspassword',
         user_email: 'test-user-2-email',
         credits: 10
       },
       {
         id: 3,
-        user_name: 'Fry',
-        password: 'fryspassword',
+        username: 'Fry',
+        user_password: 'fryspassword',
         user_email: 'test-user-3-email',
         credits: 10
       },
       {
         id: 4,
-        user_name: 'Claire',
-        password: 'password',
+        username: 'Claire',
+        user_password: 'password',
         user_email: 'test-user-4-email',
         credits: 10
       },
     ]
   }
   
-  function makeArticlesArray() {
+  function makeBlocksArray() {
     return (
         [
         {
@@ -293,6 +293,12 @@ function makeUsersArray() {
     )
 
   }
+
+  function makeBlocksFixtures() {
+    const testUsers = makeUsersArray()
+
+    return { testUsers }
+  }
   
   function makeExpectedBlock(users, block, feedback=[]) {
     const userName = users.find(user => user.id === block.user_id)
@@ -340,7 +346,11 @@ function makeUsersArray() {
   function seedMaliciousArticle(db, user, article) {
   
   }
+
+ 
   
   module.exports = {
-
+    makeUsersArray,
+    makeBlocksArray,
+    makeBlocksFixtures
   }

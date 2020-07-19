@@ -24,8 +24,8 @@ app.use(helmet())
 app.use(cors())
 
 app.use('/api/recent-blocks', UserBlocksRouter);
-app.use('/api/blocks/', BlockRouter);
-app.use('/api/feedback/', FeedbackRouter);
+app.use('/api/blocks', BlockRouter);
+app.use('/api/feedback', FeedbackRouter);
 app.use('/api/auth', AuthRouter);
 
 

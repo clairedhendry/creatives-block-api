@@ -1,10 +1,8 @@
 const BlockService = {
 
-    getAllRecentBlocks(knex) {
+    getAllRecentBlocks(knex, number) {
         return knex
-            .from('blocks')
-            .select('*')
-            .limit(60)
+            .raw('select * from "blocks" order by id desc limit 50')
     },
 
     getAllBlocksByUser(knex, user_name) {
@@ -43,11 +41,11 @@ const BlockService = {
     },
 
     
-    getUserId(knex, username) {
+    getUserId(knex, user_name) {
         return knex
             .select('id')
             .from('users')
-            .where('username', username)
+            .where('user_name', user_name)
             .first()
     }
 }
