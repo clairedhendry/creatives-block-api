@@ -24,11 +24,11 @@ const UsersService = {
         return bcrypt.hash(password, 12)
     },
 
-    hasUserWithUserName(knex, user_name) {
+    hasUserWithuser_name(knex, user_name) {
         return knex
             .select('*')
             .from('users')
-            .where('username', user_name)
+            .where('user_name', user_name)
             .first()
             .then(user => !!user)
     },

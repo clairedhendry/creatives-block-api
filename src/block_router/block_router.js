@@ -4,6 +4,8 @@ const BlockService = require('./block_service');
 const AssetService = require('./asset-service')
 const { requireAuth } = require('../middleware/jwt-auth');
 const { requireAPIToken } = require('../middleware/api-auth');
+const { getImages, uploadImage } = require('./asset-controller')
+const upload = require('./asset-service')
 
 
 const BlockRouter = express.Router();
@@ -67,40 +69,43 @@ BlockRouter
     })
 
 BlockRouter
-    .route('/:user_name')
-    .all(requireAuth)
+    .route('/upload')
+    // .all(requireAuth)
     .post(jsonParser, (req, res, next) => {
        
         const { user_name, category_id, block_title, block_file, block_description, feedback_details, date_updated } = req.body;
+        const userName = user_name 
 
         const user_id = BlockService.getUserId(
             req.app.get('db'),
-            req.params.user_name
+            req.body.user_name
         )
-       
-        const newBlock = { user_name, user_id, category_id, block_title, block_file, block_description, feedback_details }
+        let block_url = ''
+        const newBlock = { user_name, user_id, category_id, block_url, block_title, block_description, feedback_details }
 
-        for(const [key, value] of Object.entries(newBlock)) {
-            if(value ==- null) {
-                return res.status(400).json({
-                    error: {message: `Missing '${key}' in request body`}
-                })
-            }
-        }
+        // for(const [key, value] of Object.entries(newBlock)) {
+        //     if(value === null) {
+        //         return res.status(400).json({
+        //             error: {message: `Missing '${key}' in request body`}
+        //         })
+        //     }
+        // }
 
         newBlock.date_updated = new Date();
         newBlock.user_id = user_id
-        newBlock.block_url;
+        
+        
 
         AssetService.uploadAsset(
             block_file,
-            block_title,
             category_id
         )
-        .then(file => {
-            newBlock.block_url = file.url
+        .then(asset => {
+            console.log(asset)
+            newBlock.block_url = asset.url
         })
-        .then(
+        console.log(newBlock)
+
         BlockService.postBlock(
             req.app.get('db'),
             newBlock
@@ -110,7 +115,7 @@ BlockRouter
                 .location(path.posix.join(req.originalUrl, `/${block.user_name}/${block.category_id}/${block.id}`))
                 .json(block)
         })
-        )
+        
         .catch(next)
     })
 
