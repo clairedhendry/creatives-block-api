@@ -7,6 +7,9 @@ module.exports = {
     API_TOKEN: process.env.API_TOKEN,
     API_KEY: process.env.API_KEY,
     API_SECRET: process.env.API_SECRET,
-    JWT_SECRET: process.env.JWT_SECRET || 'change-this-secret'
+    JWT_SECRET: process.env.JWT_SECRET || 'change-this-secret',
+    CLOUD_NAME: process.env.CLOUDINARY_NAME,
+    CLOUD_API_KEY: process.env.CLOUDINARY_API_KEY,
+    CLOUD_API_SECRET: process.env.CLOUDINARY_API_SECRET
 };
 

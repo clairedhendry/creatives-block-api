@@ -10,6 +10,7 @@ const FeedbackRouter = require('../src/feedback_router/feedback_router')
 const AuthRouter = require('../src/auth/auth-router')
 const UserBlocksRouter = require('./block_router/user-blocks-router')
 const UsersRouter = require('./users/users-router')
+const AssetRouter = require('../src/asset-router/asset-router')
 
 const app = express()
 
@@ -28,7 +29,9 @@ app.use('/api/recent-blocks', UserBlocksRouter);
 app.use('/api/blocks', BlockRouter);
 app.use('/api/feedback', FeedbackRouter);
 app.use('/api/auth', AuthRouter);
-app.use('/api/users', UsersRouter)
+app.use('/api/users', UsersRouter);
+app.use('/api/assets', AssetRouter);
+
 
 
 app.use(function errorHandler(error, req, res, next) {

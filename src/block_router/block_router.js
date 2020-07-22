@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path')
 const BlockService = require('./block_service');
+const AssetService = require('./asset-service')
 const { requireAuth } = require('../middleware/jwt-auth');
 const { requireAPIToken } = require('../middleware/api-auth');
 
@@ -14,7 +15,6 @@ BlockRouter
     .get((req, res, next) => {
         BlockService.getAllRecentBlocks(
             req.app.get('db')
-    
         )
     .then(blocks => {
         res.json(blocks)
@@ -68,10 +68,9 @@ BlockRouter
 
 BlockRouter
     .route('/:user_name')
-    // .all(requireAPIToken)
     .all(requireAuth)
     .post(jsonParser, (req, res, next) => {
-        //need to fix so that user_id is not coming through client, but verified by server
+       
         const { user_name, category_id, block_title, block_file, block_description, feedback_details, date_updated } = req.body;
 
         const user_id = BlockService.getUserId(
@@ -91,7 +90,15 @@ BlockRouter
 
         newBlock.date_updated = new Date();
         newBlock.user_id = user_id
+        newBlock.block_url;
 
+        AssetService.uploadAsset(
+            block.file
+        )
+        .then(file => {
+            newBlock.block_url = file.url
+        })
+        .then(
         BlockService.postBlock(
             req.app.get('db'),
             newBlock
@@ -101,21 +108,9 @@ BlockRouter
                 .location(path.posix.join(req.originalUrl, `/${block.user_name}/${block.category_id}/${block.id}`))
                 .json(block)
         })
+        )
         .catch(next)
     })
 
-// BlockRouter 
-//     .route('/:user_name')
-//     // .all(requireAPIToken)
-//     .get((req, res, next) => {
-//         BlockService.getAllBlocksByUser(
-//             req.app.get('db'),
-//             req.params.user_name,
-//         )
-//         .then(blocks => {
-//             res.json(blocks)
-//         })
-//         .catch(next)
-//     })
 
 module.exports = BlockRouter
