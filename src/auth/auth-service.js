@@ -6,7 +6,7 @@ const AuthService = {
     getUserWithUserName(knex, user_name) {
       return knex
         .from('users')
-        .where({ user_name })
+        .where('user_name', user_name )
         .first()
     },
 

@@ -24,9 +24,11 @@ const UsersService = {
         return bcrypt.hash(password, 12)
     },
 
-    hasUserWithUserName(db, user_name) {
-        return db('users')
-            .where({ user_name })
+    hasUserWithUserName(knex, user_name) {
+        return knex
+            .select('*')
+            .from('users')
+            .where('username', user_name)
             .first()
             .then(user => !!user)
     },

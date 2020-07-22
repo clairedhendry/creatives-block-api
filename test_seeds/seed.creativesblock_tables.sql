@@ -3,7 +3,7 @@ BEGIN;
 
 TRUNCATE block_feedback CASCADE;
 
-INSERT INTO users (user_name, user_email, user_password, credits)
+INSERT INTO users (username, user_email, user_password, credits)
 VALUES
 
 ('Leela', 'leela@planetexpress.com', '$2a$12$J.WvkYiPfp1/wtf7Jc2V8uaDUb7CQDHM9PimQzGNp6w5k7v.pgoGK', 14),

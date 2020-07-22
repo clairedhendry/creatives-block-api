@@ -39,13 +39,12 @@ const BlockService = {
     updateUserCredits(knex, user_id, newCreditCount) {
 
     },
-
     
     getUserId(knex, user_name) {
         return knex
             .select('id')
             .from('users')
-            .where('user_name', user_name)
+            .where('username', user_name)
             .first()
     }
 }
