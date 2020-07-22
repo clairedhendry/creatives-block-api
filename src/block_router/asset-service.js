@@ -1,5 +1,4 @@
 const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary')
 const { CLOUD_NAME, CLOUD_API_KEY, CLOUD_API_SECRET } = require('../../config')
 
 cloudinary.config({
@@ -8,17 +7,12 @@ cloudinary.config({
     api_secret: CLOUD_API_SECRET,
 });
 
-const storage = new CloudinaryStorage({
-    cloudinary: cloudinary,
-    folder: 'app',
-    allowedFormats: ['jpg', 'png', 'jpeg'],
-});
-
 const AssetService = {
  
-    uploadAsset(asset) {
-        cloudinary.v2.uploader.upload(asset.file, 
-         { public_id: asset.name },
+    uploadAsset(block_file, category_id) {
+        cloudinary.uploader.upload(block_file, 
+         {  folder: category_id,
+            resource_type: 'auto' },
           function(error, result) {console.log(result, error); });
     }
 

@@ -78,7 +78,7 @@ BlockRouter
             req.params.user_name
         )
        
-        const newBlock = { user_name, category_id, block_title, block_file, block_description, feedback_details }
+        const newBlock = { user_name, user_id, category_id, block_title, block_file, block_description, feedback_details }
 
         for(const [key, value] of Object.entries(newBlock)) {
             if(value ==- null) {
@@ -93,7 +93,9 @@ BlockRouter
         newBlock.block_url;
 
         AssetService.uploadAsset(
-            block.file
+            block_file,
+            block_title,
+            category_id
         )
         .then(file => {
             newBlock.block_url = file.url

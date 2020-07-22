@@ -4,7 +4,7 @@ CREATE TABLE blocks (
     user_name TEXT NOT NULL,
     category_id TEXT NOT NULL,
     block_title TEXT NOT NULL,
-    block_file TEXT NOT NULL,
+    block_url TEXT NOT NULL,
     block_description TEXT NOT NULL,
     feedback_details TEXT,
     date_updated TIMESTAMPTZ NOT NULL DEFAULT now()

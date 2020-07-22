@@ -4,5 +4,5 @@ CREATE TABLE users (
     user_email TEXT NOT NULL,
     user_password TEXT NOT NULL,
     date_created TIMESTAMPTZ NOT NULL DEFAULT now(),
-    credits INTEGER,
+    credits INTEGER
 );
