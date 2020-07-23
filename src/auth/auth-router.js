@@ -1,5 +1,6 @@
 const express = require('express');
 const AuthService = require('./auth-service')
+const requireAuth = require('../middleware/basic-auth')
 
 const AuthRouter = express.Router();
 const jsonParser = express.json();
@@ -40,6 +41,8 @@ AuthRouter
                         })         
         .catch(next)
     })
+
+
 
 
 module.exports = AuthRouter

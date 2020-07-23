@@ -20,12 +20,12 @@ VALUES
 (2, 'Bender', 'art', 'Illustration 3', 'https://images-na.ssl-images-amazon.com/images/I/31Rvw9O8ApL._AC_.jpg', 'a portrait of someone we met last delivery', 'can"t seem to finish the head right', '2020-06-12'),
 (2, 'Bender', 'art', 'Illustration 2', 'https://images-na.ssl-images-amazon.com/images/I/31Rvw9O8ApL._AC_.jpg', 'a portrait of someone we met last delivery', 'can"t seem to finish the head right', '2020-05-10'),
 
-(2, 'Bender', 'writing', 'Benders Poem', 'https://docs.google.com/document/d/1f6P9PHagTXIpqfbHm2JsxXgytPnYWmliePhIectew2g/edit?usp=sharing', 'a poem', 'how about the word choice', '2020-01-11'),
-(2, 'Bender', 'writing', 'bender is the greatest', 'https://docs.google.com/document/d/1pYdOBTDbz8nAi8E_K-c_3xbWstmmMv5B1EtfH7g9Tjk/edit?usp=sharing', 'a short story about how i saved the world', 'am i cool enough? i think i can seem cooler', '2020-06-12'),
-(2, 'Bender', 'writing', 'Fry - A Play', 'https://docs.google.com/document/d/1MErlUTZrfLB9IdiD1kNMiBq0sDSVNBJSZ6WwuVvnw9k/edit?usp=sharing', 'a play about fry', 'looking for technical edits', '2019-07-12'),
-(1, 'Leela', 'writing', 'A short story', 'https://docs.google.com/document/d/1MErlUTZrfLB9IdiD1kNMiBq0sDSVNBJSZ6WwuVvnw9k/edit?usp=sharing', 'a story about fry', 'looking for technical edits', '2020-03-15'),
-(2, 'Bender', 'writing', 'Benders Second Poem', 'https://docs.google.com/document/d/1f6P9PHagTXIpqfbHm2JsxXgytPnYWmliePhIectew2g/edit?usp=sharing', 'a poem', 'how about the word choice', '2020-01-15'),
-(2, 'Bender', 'writing', 'bender is the greatest', 'https://docs.google.com/document/d/1pYdOBTDbz8nAi8E_K-c_3xbWstmmMv5B1EtfH7g9Tjk/edit?usp=sharing', 'a short story about how i saved the world', 'am i cool enough? i think i can seem cooler', '2020-03-02'),
+(2, 'Bender', 'writing', 'Benders Poem', 'https://res.cloudinary.com/creatives-block/raw/upload/v1595524259/writing/Benders_poem_f1jwhe.docx', 'a poem', 'how about the word choice', '2020-01-11'),
+(2, 'Bender', 'writing', 'bender is the greatest', 'https://res.cloudinary.com/creatives-block/raw/upload/v1595524259/writing/Benders_poem_f1jwhe.docx', 'a short story about how i saved the world', 'am i cool enough? i think i can seem cooler', '2020-06-12'),
+(2, 'Bender', 'writing', 'Fry - A Play', 'https://res.cloudinary.com/creatives-block/raw/upload/v1595524259/writing/Benders_poem_f1jwhe.docx', 'a play about fry', 'looking for technical edits', '2019-07-12'),
+(1, 'Leela', 'writing', 'A short story', 'https://res.cloudinary.com/creatives-block/raw/upload/v1595524259/writing/Benders_poem_f1jwhe.docx', 'a story about fry', 'looking for technical edits', '2020-03-15'),
+(2, 'Bender', 'writing', 'Benders Second Poem', 'https://res.cloudinary.com/creatives-block/raw/upload/v1595524259/writing/Benders_poem_f1jwhe.docx', 'a poem', 'how about the word choice', '2020-01-15'),
+(2, 'Bender', 'writing', 'bender is the greatest', 'https://res.cloudinary.com/creatives-block/raw/upload/v1595524259/writing/Benders_poem_f1jwhe.docx', 'a short story about how i saved the world', 'am i cool enough? i think i can seem cooler', '2020-03-02'),
 
 (3, 'Fry', 'music', 'Holophonor suite 1', 'https://freesound.org/data/previews/177/177843_1506826-lq.mp3', 'holophonor suite 1', 'cant seem to figure out this line', '2020-06-17'),
 (3, 'Fry', 'music', 'Holophonor song 2', 'https://freesound.org/data/previews/177/177843_1506826-lq.mp3', 'holophonor song 2', 'is it moody enough?', '2020-05-22'),
