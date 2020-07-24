@@ -29,7 +29,6 @@ BlockRouter.route("/:category/:id")
       req.params.category,
       req.params.id
     )
-
       .then((block) => {
         if (!block) {
           return res.status(404).json({
@@ -66,7 +65,7 @@ BlockRouter.route("/:category/:id")
   });
 
 BlockRouter.route("/upload")
-  // .all(requireAuth)
+  .all(requireAuth)
   .post(upload.any(), (req, res, next) => {
     const {
       user_name,
@@ -77,8 +76,7 @@ BlockRouter.route("/upload")
     } = req.body;
 
     const newBlock = {
-      user_id: 1,
-      //user_id: req.user.id,
+      user_id: req.user.id,
       user_name,
       category_id,
       block_title,
@@ -94,8 +92,8 @@ BlockRouter.route("/upload")
       }
     }
 
-    console.log(req.body);
-    console.log(req.files);
+    // console.log(req.body);
+    // console.log(req.files);
 
     // upload the image
 
@@ -107,7 +105,11 @@ BlockRouter.route("/upload")
 
     cloudinary.uploader.upload(
       req.files[0].path,
-      { overwrite: false },
+      {
+        overwrite: false,
+        resource_type: "auto",
+        folder: `${req.body.category_id}`,
+      },
       (error, result) => {
         if (!error) {
           newBlock.block_url = result.url;
