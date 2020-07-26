@@ -1,9 +1,9 @@
 module.exports = {
   PORT: process.env.PORT || 8000,
   CLIENT_ORIGIN:
-    "http://localhost:3000" ||
-    "https://creatives-block-client.vercel.app" ||
-    "https://nameless-temple-42312.herokuapp.com",
+    // "http://localhost:3000" ||
+    "https://creatives-block-client.vercel.app",
+
   NODE_ENV: process.env.NODE_ENV || "development",
   DATABASE_URL:
     process.env.DATABASE_URL ||
