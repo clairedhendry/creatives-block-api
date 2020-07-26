@@ -107,9 +107,7 @@ BlockRouter.route("/upload")
       req.files[0].path,
       {
         overwrite: false,
-        type: "authenticated",
         resource_type: "auto",
-        access_control: "anonymous",
         folder: `${req.body.category_id}`,
       },
       (error, result) => {
