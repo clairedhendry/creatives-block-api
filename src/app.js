@@ -18,12 +18,12 @@ const morganOption = NODE_ENV === "production" ? "tiny" : "common";
 app.use(morgan(morganOption));
 app.use(helmet());
 app.options("*", cors());
-app.use(
-  cors({
-    origin: CLIENT_ORIGIN,
-  })
-);
-// app.use(cors());
+// app.use(
+//   cors({
+//     origin: CLIENT_ORIGIN,
+//   })
+// );
+app.use(cors());
 
 app.use("/api/recent-blocks", UserBlocksRouter);
 app.use("/api/blocks", BlockRouter);
@@ -36,9 +36,9 @@ app.use(function errorHandler(error, req, res, next) {
   if (NODE_ENV === "production") {
     response = { error: { message: "server error" } };
   } else {
-    console.error(error);
     response = { message: error.message, error };
   }
+  console.error(error);
   res.status(500).json(response);
 });
 

@@ -92,8 +92,8 @@ BlockRouter.route("/upload")
       }
     }
 
-    // console.log(req.body);
-    // console.log(req.files);
+    console.log(req.body);
+    console.log(req.files);
 
     // upload the image
 
