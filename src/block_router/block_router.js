@@ -91,13 +91,6 @@ BlockRouter.route("/upload")
         });
       }
     }
-    // upload the image
-
-    // wait for that to be done
-
-    // take that url and add it to newBlock
-
-    // postblock
 
     cloudinary.uploader.upload(
       req.files[0].path,
@@ -141,6 +134,8 @@ BlockRouter.route("/writing-upload")
       block_description,
       feedback_details,
     } = req.body;
+
+    console.log(req.body)
 
     const newBlock = {
       user_id: req.user.id,
