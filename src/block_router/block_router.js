@@ -132,7 +132,7 @@ BlockRouter.route("/upload")
 
 BlockRouter.route("/writing-upload")
   .all(requireAuth)
-  .post(upload.any(), (req, res, next) => {
+  .post((req, res, next) => {
     const {
       user_name,
       category_id,
