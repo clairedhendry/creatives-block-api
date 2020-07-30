@@ -11,7 +11,6 @@ const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 
 BlockRouter.route("/recent-blocks")
-  // .all(requireAPIToken)
   .get((req, res, next) => {
     BlockService.getAllRecentBlocks(req.app.get("db"))
       .then((blocks) => {
@@ -21,7 +20,6 @@ BlockRouter.route("/recent-blocks")
   });
 
 BlockRouter.route("/:category/:id")
-  // .all(requireAPIToken)
   .all(requireAuth)
   .all((req, res, next) => {
     BlockService.getBlockById(

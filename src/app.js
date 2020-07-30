@@ -23,7 +23,6 @@ app.use(
     origin: CLIENT_ORIGIN,
   })
 );
-// app.use(cors());
 
 app.use("/api/recent-blocks", UserBlocksRouter);
 app.use("/api/blocks", BlockRouter);
