@@ -1,6 +1,6 @@
 const BlockService = {
   getAllRecentBlocks(knex, number) {
-    return knex.raw('select * from "blocks" order by id desc limit 50');
+    return knex.raw('select * from "blocks" order by id desc limit 150');
   },
 
   getAllBlocksByUser(knex, user_name) {
@@ -26,7 +26,7 @@ const BlockService = {
   },
 
   //protected
-  updateUserCredits(knex, user_id, newCreditCount) {},
+  updateUserCredits(knex, user_id, newCreditCount) { },
 
   getUserId(knex, user_name) {
     return knex
