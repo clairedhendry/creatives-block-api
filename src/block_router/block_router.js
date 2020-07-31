@@ -123,15 +123,8 @@ BlockRouter.route("/upload")
 
 BlockRouter.route("/writing-upload")
   .all(requireAuth)
-  .post((req, res, next) => {
-    const {
-      user_name,
-      category_id,
-      block_title,
-      block_file,
-      block_description,
-      feedback_details,
-    } = req.body;
+  .post(jsonParser, (req, res, next) => {
+    const { user_name, category_id, block_title, block_file, block_description, feedback_details } = req.body;
 
     console.log(req.body)
 
