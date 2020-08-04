@@ -99,7 +99,7 @@ BlockRouter.route("/upload")
       },
       (error, result) => {
         if (!error) {
-          newBlock.block_url = result.url;
+          newBlock.block_url = result.secure_url;
           BlockService.postBlock(req.app.get("db"), newBlock)
             .then((block) => {
               res
