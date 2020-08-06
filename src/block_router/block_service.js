@@ -6,11 +6,11 @@ const BlockService = {
   getAllBlocksByUser(knex, user_name) {
     return knex.from("blocks").select("*").where("user_name", user_name);
   },
-  //protected
+
   getBlockById(knex, category, block_id) {
     return knex.from("blocks").select("*").where("id", block_id).first();
   },
-  //protected
+
   postBlock(knex, newBlock) {
     return knex
       .insert(newBlock)
@@ -25,8 +25,6 @@ const BlockService = {
     return knex.from("blocks").where({ block_id }).update(newBlock);
   },
 
-  //protected
-  updateUserCredits(knex, user_id, newCreditCount) { },
 
   getUserId(knex, user_name) {
     return knex

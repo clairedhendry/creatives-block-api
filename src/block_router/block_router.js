@@ -42,26 +42,6 @@ BlockRouter.route("/:category/:id")
     res.json(res.block);
   })
 
-  .patch(jsonParser, (req, res, next) => {
-    const {
-      id,
-      block_file,
-      block_description,
-      feedback_details,
-      date_updated,
-    } = req.body;
-    const newBlock = { id, block_file, block_description, feedback_details };
-
-    newBlock.date_updated = new Date();
-    newBlock.user_id = req.user.id;
-
-    BlockService.updateBlock(req.app.get("db"), req.params.id, newBlock)
-      .then((numRowsAffected) => {
-        res.status(204).end();
-      })
-      .catch(next);
-  });
-
 BlockRouter.route("/upload")
   .all(requireAuth)
   .post(upload.any(), (req, res, next) => {
@@ -125,8 +105,6 @@ BlockRouter.route("/writing-upload")
   .all(requireAuth)
   .post(jsonParser, (req, res, next) => {
     const { user_name, category_id, block_title, block_file, block_description, feedback_details } = req.body;
-
-    console.log(req.body)
 
     const newBlock = {
       user_id: req.user.id,
