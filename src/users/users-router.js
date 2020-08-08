@@ -35,7 +35,6 @@ UsersRouter
                             user_name,
                             user_email,
                             user_password: hashedPassword,
-                            // date_created: 'now()'
                         }
                         return UsersService.insertUser(
                             req.app.get('db'),

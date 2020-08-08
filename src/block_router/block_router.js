@@ -44,14 +44,9 @@ BlockRouter.route("/:category/:id")
 
 BlockRouter.route("/upload")
   .all(requireAuth)
-  .post(upload.any(), (req, res, next) => {
-    const {
-      user_name,
-      category_id,
-      block_title,
-      block_description,
-      feedback_details,
-    } = req.body;
+  .post(upload.any(), jsonParser, (req, res, next) => {
+
+    const { user_name, category_id, block_title, block_description, feedback_details } = req.body;
 
     const newBlock = {
       user_id: req.user.id,
@@ -104,6 +99,7 @@ BlockRouter.route("/upload")
 BlockRouter.route("/writing-upload")
   .all(requireAuth)
   .post(jsonParser, (req, res, next) => {
+
     const { user_name, category_id, block_title, block_file, block_description, feedback_details } = req.body;
 
     const newBlock = {
