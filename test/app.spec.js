@@ -3,8 +3,6 @@ const knex = require('knex');
 const app = require('../src/app');
 const helpers = require('./test-helpers');
 const supertest = require('supertest');
-const FormData = require('form-data')
-const fs = require('fs')
 
 describe(`Creative's Block endpoints`, () => {
     let db;
@@ -126,7 +124,7 @@ describe(`Creative's Block endpoints`, () => {
                 .insert(testBlocks)
                 .into('blocks')
         })
-        //posts new feedback and checking that it is inserted into db 
+
         it('responds with 201 created when posting new feedback', () => {
             const newFeedback = {
                 block_id: 1,
