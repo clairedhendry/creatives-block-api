@@ -21,10 +21,9 @@ const BlockService = {
       });
   },
 
-  updateBlock(knex, block_id, newBlock) {
-    return knex.from("blocks").where({ block_id }).update(newBlock);
+  updateBlock(knex, block_id, updatedBlock) {
+    return knex.from("blocks").where({ block_id }).update(updatedBlock);
   },
-
 
   getUserId(knex, user_name) {
     return knex

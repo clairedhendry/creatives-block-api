@@ -138,6 +138,59 @@ BlockRouter.route("/writing-upload")
       .catch(next);
   })
 
+BlockRouter.route("/update/:block_id")
+.all(requireAuth)
+.patch(upload.any(), jsonParser, (req, res, next) => {
+
+  const { user_name, category_id, block_title, block_description, feedback_details } = req.body;
+
+  const updatedBlock = {
+    user_id: req.user.id,
+    user_name,
+    category_id,
+    block_title,
+    block_description,
+    feedback_details,
+  };
+
+  for (const [key, value] of Object.entries(updatedBlock)) {
+    if (value === null) {
+      return res.status(400).json({
+        error: { message: `Missing '${key}' in request body` },
+      });
+    }
+  }
+
+  cloudinary.uploader.upload(
+    req.files[0].path,
+    {
+      overwrite: true,
+      resource_type: "auto",
+      folder: `${req.body.category_id}`,
+    },
+    (error, result) => {
+      if (!error) {
+        updatedBlock.block_url = result.secure_url;
+        BlockService.updateBlock(req.app.get("db"), req.params.block_id, updatedBlock)
+          .then((block) => {
+            res
+              .status(201)
+              .location(
+                path.posix.join(
+                  req.originalUrl,
+                  `/${block.user_name}/${block.category_id}/${block.id}`
+                )
+              )
+              .json(block);
+          })
+
+          .catch(next);
+      } else {
+        res.send(400).json({ message: "Error updating" });
+      }
+    }
+  );
+});
 
 
 module.exports = BlockRouter;

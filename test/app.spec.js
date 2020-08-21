@@ -143,4 +143,39 @@ describe(`Creative's Block endpoints`, () => {
                 })
         })
     })
+
+    describe.only('PATCH /api/update/:block_id updates block', () => {
+        beforeEach('insert test users', () => {
+            return db
+                .insert(testUsers)
+                .into('users')
+        })
+        beforeEach('insert test blocks', () => {
+            return db
+                .insert(testBlocks)
+                .into('blocks')
+        })
+        beforeEach('insert test feedback', () => {
+            return db
+                .insert(testFeedback)
+                .into('block_feedback')
+        })
+
+        it('updates block, returns updated block', () => {
+            const updatedBlock = {
+                block_id: 1,
+                feedback: "test feedback"
+            }            
+        })
+
+        const blockToBeUpdated = 2
+        return supertest(app)
+        .post(`/api/blocks/update/${blockToBeUpdated}`)
+        .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
+        .field('name', 'Logo')
+        .attach('file', './test/art-logo.jpg')
+        .then(res => {
+            console.log(res.status)
+        })
+    })
 })
